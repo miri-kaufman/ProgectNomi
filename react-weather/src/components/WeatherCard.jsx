@@ -20,7 +20,7 @@ const WeatherCard = ({ historyWeatherData }) => {
 
         fetchHourlyTemperatures();
     }, [historyWeatherData]);
-
+    const today=historyWeatherData.forecast.forecastday[0]
     return (
         <div>
             <h1>Weather in {historyWeatherData.location.region}</h1>
