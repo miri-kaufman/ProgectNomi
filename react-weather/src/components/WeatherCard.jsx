@@ -20,10 +20,25 @@ const WeatherCard = ({ historyWeatherData }) => {
 
         fetchHourlyTemperatures();
     }, [historyWeatherData]);
-    const today=historyWeatherData.forecast.forecastday[0]
+    // const today=historyWeatherData.forecast.forecastday[0]
+  
+
+    const { region, country, localtime } = historyWeatherData.location;
+    const todayForecast = historyWeatherData.forecast.forecastday[0].hour[0];
+    const { humidity, precip_mm, wind_kph,temp_c } = todayForecast;
+    const {text}=todayForecast.condition
+
+    console.log(todayForecast);
     return (
         <div>
-            <h1>Weather in {historyWeatherData.location.region}</h1>
+             <h1>Weather in {region}, {country}</h1>
+            <p>Local Time: {localtime}</p>
+            <p>Temp:{temp_c}</p>
+            <p>{text}</p>
+            <p>Humidity: {humidity}%</p>
+            <p>Precipitation: {precip_mm} mm</p>
+            <p>Wind: {wind_kph} kph</p>
+            <h1>Weather in all hours</h1>
             <div>
                 {hourlyTemperatures.map(({ hour, temp }) => (
                     <div key={hour}>
