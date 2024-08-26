@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../weatherCard.css";
+// import "../weatherCard.css";
 
 const WeatherCard = ({ historyWeatherData }) => {
     const [hourlyTemperatures, setHourlyTemperatures] = useState([]);
@@ -29,24 +29,36 @@ const WeatherCard = ({ historyWeatherData }) => {
     const {text}=todayForecast.condition
 
     console.log(todayForecast);
-    return (
-        <div>
-             <h1>Weather in {region}, {country}</h1>
-            <p>Local Time: {localtime}</p>
-            <p>Temp:{temp_c}</p>
-            <p>{text}</p>
-            <p>Humidity: {humidity}%</p>
-            <p>Precipitation: {precip_mm} mm</p>
-            <p>Wind: {wind_kph} kph</p>
-            <h1>Weather in all hours</h1>
-            <div>
-                {hourlyTemperatures.map(({ hour, temp }) => (
-                    <div key={hour}>
-                        <strong>{hour}:00 -</strong> {temp}
+        return (
+            <div className="weather-card">
+                <h1> {region}</h1>
+                <h1>{country}</h1> 
+                <p> {localtime}</p>
+                <div className="temperature">{temp_c}°</div>
+                <p className="condition">{text}</p>
+                <div className="details">
+                    <div>
+                        <p>Precipitation</p>
+                        <p>{precip_mm} mm</p>
                     </div>
-                ))}
+                    <div>
+                        <p>Humidity</p>
+                        <p>{humidity}%</p>
+                    </div>
+                    <div>
+                        <p>Wind</p>
+                        <p>{wind_kph} km/h</p>
+                    </div>
+                </div>
+                <div className="hourly-forecast">
+                    {hourlyTemperatures.map(({ hour, temp }) => (
+                        <div key={hour}>
+                            <span>{hour}:00</span> <span>{temp}</span>
+                        </div>
+                    ))}
+                </div>
             </div>
-        </div>
-    );
+        );
+    
 };
 export default WeatherCard
