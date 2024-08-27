@@ -19,7 +19,7 @@ const WeatherCard = ({ historyWeatherData }) => {
 
         fetchHourlyTemperatures();
     }, [historyWeatherData]);
-    const { region, country, localtime } = historyWeatherData.location;
+    const { region, country, localtime, lat, lon,last_updated } = historyWeatherData.location;
     const todayForecast = historyWeatherData.forecast.forecastday[0].hour[0];
     const { humidity, precip_mm, wind_kph, temp_c } = todayForecast;
     const { text } = todayForecast.condition
