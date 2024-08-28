@@ -58,6 +58,19 @@ This project is a weather application that allows users to search for historical
 1. Open your browser and navigate to `http://localhost:5173`.
 2. Enter a city name in the search input and click the "Check" button to fetch historical weather data.
 
+## Screenshots
+
+Here are some screenshots of the application:
+
+### Desktop Screen
+![Main Screen](assets/images/Desktop.png)
+
+### Tablet Screen
+![Search Results](assets/images/Tablet.png)
+
+### Smartphone Message
+![Error Message](assets/images/SmartPhone.png)
+
 ## API Endpoints
 
 ### GET /weather

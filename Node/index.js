@@ -3,7 +3,7 @@ import cors from "cors"
 import {config} from "dotenv"
 import { errorHandling } from "./middleWares/errorHandling.js";
 
-import WeatherRouter from "./routWeather.js"
+import WeatherRouter from "./routes/routWeather.js"
 config()
 const app=express()
 app.use(express.json())

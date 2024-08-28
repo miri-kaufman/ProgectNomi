@@ -1,5 +1,9 @@
 export const errorHandling = (err, req, res, next) => {
-    let statusCode = res.statusCode || 500;
-    let message = err.message || "מצטערים התרחשה שגיאה בשרת";
-    res.status(statusCode).send(message);
+    const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+    res.status(statusCode);
+    console.error(err);
+    res.json({
+        status: statusCode,
+        message: err.message || "מצטערים התרחשה שגיאה בשרת"
+    });
 };

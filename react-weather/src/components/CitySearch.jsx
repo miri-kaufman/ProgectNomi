@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import WeatherCard from "./WeatherCard";
-import { getHistoryWeather } from './weatherApi';
+import { getHistoryWeather } from '../services/weatherService.jsx';
 import './style.css';
 
 import logo from '../assets/logo.svg'; // Assuming the image is in src/assets folder
@@ -16,12 +16,12 @@ const CitySearch = () => {
 
     const handleButtonClick = async () => {
       const validInputPattern = /^[a-zA-Z\s]+$/; // Only allows English letters and spaces
-        // if (!inputValue) {
-        //     setError("Please enter a city");
-        //     console.log(error);
-        //     // setHistoryData(null);
-        //     return;
-        // }
+        if (!inputValue) {
+            setError("Please enter a city");
+            console.log(error);
+            setHistoryData(null);
+            return;
+        }
         if (!validInputPattern.test(inputValue)) {
           setError("Please enter a valid city name");
           setHistoryData(null);
