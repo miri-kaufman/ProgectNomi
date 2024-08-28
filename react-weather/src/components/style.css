@@ -120,7 +120,7 @@ label {
     text-align: center;
     font: normal normal 200 18px Heebo;
     letter-spacing: 0px;
-    color: #E8F1F2;
+    color: #A8C6CB ;
 }
 
 .text2 {
@@ -284,6 +284,9 @@ label {
         right: 0;
         width: 100%;
     }
+    .additional-info {
+        position: static;
+    }
 }
 
 /* iPhone 6/7/8 (375px) */
@@ -314,6 +317,9 @@ label {
     button {
         right: 0;
         width: 100%;
+    }
+    .additional-info {
+        position: static;
     }
 }
 
@@ -346,6 +352,9 @@ label {
         right: 0;
         width: 100%;
     }
+    .additional-info {
+        position: static;
+    }
 }
 
 /* iPad Landscape (1024px) */
@@ -376,5 +385,8 @@ label {
     button {
         right: 0;
         width: 100%;
+    }
+    .additional-info {
+        position: static;
     }
 }
