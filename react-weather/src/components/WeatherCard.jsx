@@ -24,7 +24,8 @@ const WeatherCard = ({ historyWeatherData }) => {
     const date = new Date(dateParts[0]);
     const localtimeString = `${date.getDate()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear().toString().slice(2)} at ${dateParts[1]}`;
     const todayForecast = historyWeatherData.forecast.forecastday[0].hour[0];
-    const { humidity, precip_mm, wind_kph, temp_c } = todayForecast;
+    const { humidity, precip_mm, wind_kph } = todayForecast;
+    const {temp_c}=historyWeatherData.current
     const { text } = todayForecast.condition
     return (
         <>
