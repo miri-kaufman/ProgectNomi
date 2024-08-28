@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import WeatherCard from "./WeatherCard";
 import { getHistoryWeather } from './weatherApi';
 import './style.css';
-import logo from '../assets/logo.svg'; 
+
+import logo from '../assets/logo.svg'; // Assuming the image is in src/assets folder
 
 const CitySearch = () => {
     const [inputValue, setInputValue] = useState('');
@@ -43,6 +44,9 @@ const CitySearch = () => {
           console.log('Error fetching weather data:', error);
       }
     };
+    const lastUpdated = historyData && historyData.current.last_updated;
+    const lat = historyData &&  historyData.location.lat;
+    const lon = historyData && historyData.location.lon;
 
     return (
         <div className="main">
@@ -69,7 +73,10 @@ const CitySearch = () => {
             <div className='card'>
                 {historyData && <WeatherCard historyWeatherData={historyData} />}
             </div>
-
+           { historyData&&<div className="additional-info">
+    <p className="info-line">latitude: {lat} <span className="spacer"></span> longitude: {lon}</p>
+    <p className="info-line">accurate to: {lastUpdated}</p>
+</div>}
         </div>
     );
 };

@@ -11,7 +11,7 @@ const WeatherCard = ({ historyWeatherData }) => {
             const hours = [currentHour - 3, currentHour - 2, currentHour - 1, currentHour, currentHour + 1].filter(h => h >= 0 && h < 24);
             const hourlyTemps = hours.map(h => ({
                 hour: h,
-                temp: hourlyData[h].temp_c + '°C'
+                temp: hourlyData[h].temp_c + '°'
             }));
 
             setHourlyTemperatures(hourlyTemps);
@@ -19,31 +19,33 @@ const WeatherCard = ({ historyWeatherData }) => {
 
         fetchHourlyTemperatures();
     }, [historyWeatherData]);
-    const { region, country, localtime, lat, lon,last_updated } = historyWeatherData.location;
+    const { region, country, localtime} = historyWeatherData.location;
+    const dateParts = localtime.split(" ");
+    const date = new Date(dateParts[0]);
+    const localtimeString = `${date.getDate()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear().toString().slice(2)} at ${dateParts[1]}`;
     const todayForecast = historyWeatherData.forecast.forecastday[0].hour[0];
     const { humidity, precip_mm, wind_kph, temp_c } = todayForecast;
     const { text } = todayForecast.condition
-
-    console.log(todayForecast);
     return (
+        <>
         <div className="weather-card">
             <div>
                 <h1> {region}</h1>
                 <h2>{country}</h2>
-                <p className="location"> {localtime}</p>
+                <p className="location"> {localtimeString}</p>
                 <div className="temperature">{temp_c}°</div>
                 <p className="condition">{text}</p>
                 <div className="details">
                     <div>
-                        <p className="text1">Precipitation</p>
+                        <p className="text1">precipitation</p>
                         <p className="text2">{precip_mm} mm</p>
                     </div>
                     <div>
-                        <p className="text1">Humidity</p>
+                        <p className="text1">humidity</p>
                         <p className="text2">{humidity}%</p>
                     </div>
                     <div>
-                        <p className="text1">Wind</p>
+                        <p className="text1">wind</p>
                         <p className="text2">{wind_kph} km/h</p>
                     </div>
                 </div>
@@ -55,8 +57,9 @@ const WeatherCard = ({ historyWeatherData }) => {
                     ))}
                 </div>
             </div>
-
         </div>
+
+        </>
     );
 
 };
