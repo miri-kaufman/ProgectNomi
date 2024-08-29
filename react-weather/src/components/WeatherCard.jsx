@@ -8,8 +8,8 @@ const WeatherCard = ({ historyWeatherData, yesterday, tomorrow }) => {
     const fetchHourlyTemperatures = () => {
         const currentHour = new Date(historyWeatherData.location.localtime).getHours();
         const hourlyDataToday = historyWeatherData.forecast.forecastday[0].hour;
-        const hourlyDataTomorrow = tomorrow && tommorowData.forecast.forecastday[0].hour;
-        const hourlyDataYesterday = yesterday && yesterdaData.forecast.forecastday[0].hour;
+        const hourlyDataTomorrow = tomorrow && tomorrow.forecast.forecastday[0].hour;
+        const hourlyDataYesterday = yesterday && yesterday.forecast.forecastday[0].hour;
         const hours = [
             (currentHour - 3 + 24) % 24,
             (currentHour - 2 + 24) % 24,
