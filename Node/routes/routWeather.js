@@ -1,7 +1,7 @@
-import  Router from "express";
+import Router from "express";
 import { getHistoryWeather } from "../controllers/WeatherControler.js";
-const router=Router()
+const router = Router()
 
-router.get('/',getHistoryWeather );
+router.get('/', getHistoryWeather);
 
 export default router

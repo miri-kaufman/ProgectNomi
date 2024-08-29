@@ -1,35 +1,54 @@
 import React, { useEffect, useState } from "react";
-import moment from 'moment'; 
-import './style.css';
+import moment from 'moment';
+import '../styles/style.css';
 
-const WeatherCard = ({ historyWeatherData }) => {
+const WeatherCard = ({ historyWeatherData, yesterday, tomorrow }) => {
     const [hourlyTemperatures, setHourlyTemperatures] = useState([]);
 
     const fetchHourlyTemperatures = () => {
         const currentHour = new Date(historyWeatherData.location.localtime).getHours();
-        const hourlyData = historyWeatherData.forecast.forecastday[0].hour;
-        const hours = [currentHour - 3, currentHour - 2, currentHour - 1, currentHour, currentHour + 1].filter(h => h >= 0 && h < 24);
-        const hourlyTemps = hours.map(h => ({
-            hour: h,
-            temp: Math.ceil(hourlyData[h].temp_c) + '°'
-        }));
+        const hourlyDataToday = historyWeatherData.forecast.forecastday[0].hour;
+        const hourlyDataTomorrow = tomorrow && tommorowData.forecast.forecastday[0].hour;
+        const hourlyDataYesterday = yesterday && yesterdaData.forecast.forecastday[0].hour;
+        const hours = [
+            (currentHour - 3 + 24) % 24,
+            (currentHour - 2 + 24) % 24,
+            (currentHour - 1 + 24) % 24,
+            currentHour,
+            (currentHour + 1) % 24
+        ];
+        const hourlyTemps = hours.map(h => {
+            let temp;
+            console.log(h);
+            if (currentHour === 23 && h === 0) {
+                console.log(hourlyDataTomorrow);
+                temp = Math.ceil(hourlyDataTomorrow[h].temp_c);
+            } else if (currentHour < 3 && h >= 21) {
+                console.log(hourlyDataYesterday);
+                temp = Math.ceil(hourlyDataYesterday[h].temp_c);
+            } else {
+                console.log(hourlyDataToday);
+                temp = Math.ceil(hourlyDataToday[h].temp_c);
+            }
+
+            return { hour: h, temp: `${temp}°` };
+        });
 
         setHourlyTemperatures(hourlyTemps);
     };
 
     useEffect(() => {
         fetchHourlyTemperatures();
-    }, [historyWeatherData]);
+    }, [historyWeatherData, tomorrow, yesterday]);
 
     const { region, country, localtime } = historyWeatherData.location;
     const dateParts = localtime.split(" ");
     const date = moment(dateParts[0]);
-    const localtimeString = `${date.format('DD/MM/YY')} at ${dateParts[1]}`; 
+    const localtimeString = `${date.format('DD/MM/YY')} at ${dateParts[1]}`;
     const todayForecast = historyWeatherData.forecast.forecastday[0].hour[0];
     const { humidity, precip_mm, wind_kph } = todayForecast;
     const { temp_c } = historyWeatherData.current;
     const { text } = todayForecast.condition;
-
     return (
         <div className="weather-card">
             <div>
