@@ -13,52 +13,41 @@ This project is a weather application that allows users to search for historical
 
 ## Installation
 
-### Backend (Node.js)
+To install and run the project locally, follow these steps:
 
 1. Clone the repository:
     ```bash
     git clone https://github.com/yourusername/weather-app.git
-    cd weather-app/Node
+    cd weather-app
     ```
 
-2. Install dependencies:
+2. Install backend dependencies:
     ```bash
+    cd backend
     npm install
     ```
 
-3. Create a `.env` file in the `Node` directory and add your API key:
-    ```env
-    APIKEY=your_weather_api_key
+3. Install frontend dependencies:
+    ```bash
+    cd ../frontend
+    npm install
     ```
 
-4. Start the server:
+4. Start the backend server:
     ```bash
+    cd ../backend
     npm start
     ```
 
-### Frontend (React with Vite)
-
-1. Navigate to the React project directory:
+5. Start the frontend server:
     ```bash
-    cd ../react-weather
-    ```
-
-2. Install dependencies:
-    ```bash
-    npm install
-    ```
-
-3. Start the development server:
-    ```bash
+    cd ../frontend
     npm run dev
     ```
 
 ## Usage
 
-1. Open your browser and navigate to `http://localhost:5173`.
-2. Enter a city name in the search input and click the "Check" button to fetch historical weather data.
-
-## Screenshots
+To use the application, open your web browser and navigate to `http://localhost:3000`. Enter the name of the city you want to search for historical weather data and click the "Check" button.
 
 Here are some screenshots of the application:
 
@@ -71,35 +60,31 @@ Here are some screenshots of the application:
 ### Smartphone Message
 ![Error Message](assets/images/SmartPhone.png)
 
+
 ## API Endpoints
 
-### GET /weather
-Fetch historical weather data for a specific city.
+The backend server exposes the following API endpoints:
 
-**Parameters:**
-- `city` (string): The name of the city.
-
-**Response:**
-- `200 OK`: Returns weather data.
-- `400 Bad Request`: Invalid city name.
-- `500 Internal Server Error`: Server error.
+- `GET /api/weather/history?city={city}&date={date}`: Retrieves historical weather data for a specific city and date.
 
 ## Components
 
-### SearchBar
-A component that allows users to input a city name and trigger a search.
+The main components of the application are:
 
-### WeatherDisplay
-A component that displays the fetched weather data.
+- `CitySearch`: A component that allows users to search for historical weather data by city name.
+- `WeatherCard`: A component that displays the historical weather data for the selected city.
 
 ## Contributing
 
+Contributions are welcome! Please follow these steps to contribute:
+
 1. Fork the repository.
 2. Create a new branch (`git checkout -b feature-branch`).
-3. Commit your changes (`git commit -am 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Create a new Pull Request.
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add new feature'`).
+5. Push to the branch (`git push origin feature-branch`).
+6. Open a pull request.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

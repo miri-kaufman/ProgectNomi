@@ -431,6 +431,8 @@ label {
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-top: 1% !important;
+
     }
 
     button:disabled {
@@ -455,4 +457,39 @@ label {
     .weather-card .hourly-forecast {
         width: 100%;
     }
+}
+
+/* iPad Landscape (1024px) */
+@media (max-width: 1024px) {
+    /* .main {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .main>div {
+        width: 100%;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .weather-card {
+        width: 100%;
+        padding: 20px;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    button {
+        right: 0;
+        width: 100%;
+    }
+
+    .additional-info {
+        position: static;
+    } */
 }

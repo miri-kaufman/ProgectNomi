@@ -10,7 +10,7 @@ const CitySearch = () => {
     const [yesterday, setYesterday] = useState(null);
     const [tomorrow, setTomorrow] = useState(null);
     const [error, setError] = useState(null);
-
+   const [showWeatherCard,setShowWeatherCard]=useState(false);
     const handleInputChange = (event) => {
         setInputValue(event.target.value);
     };
@@ -28,15 +28,19 @@ const CitySearch = () => {
             return;
         }
         try {
-            let now = new Date();
+            const response = await getHistoryWeather(inputValue, new Date().toISOString().slice(0, 10))
+            let now = new Date(response.data.location.localtime);
+            const data = response.data; 
+            console.log(data)
+
+            setHistoryData(data);
             let yesterdayDate;
             let tomorrowDate;
-            if (now.getHours() === 23) {
+            if (now.getHours() == 23) {
                 tomorrowDate = new Date();
                 tomorrowDate.setDate(now.getDate() + 1);
                 const formattedDate = tomorrowDate.toISOString().slice(0, 10);
                 const res = await getHistoryWeather(inputValue, formattedDate);
-                console.log(res.data);
                 setTomorrow(res.data);
             } else if (now.getHours() < 3) {
                 yesterdayDate = new Date();
@@ -45,16 +49,14 @@ const CitySearch = () => {
                 const res = await getHistoryWeather(inputValue, formattedDate);
                 setYesterday(res.data);
             }
-
-            const format = now.toISOString().slice(0, 10);
-            const response = await getHistoryWeather(inputValue, format);
-            const data = response.data;
+            setShowWeatherCard(true)
             setError(null);
-            setHistoryData(data);
         } catch (error) {
             if (error.response && error.response.status === 400) {
+                setShowWeatherCard(false)
                 setError("Invalid city name. Please enter a valid city name.");
             } else {
+                setShowWeatherCard(false)
                 setError("An error occurred. Please try again later.");
             }
             setHistoryData(null);
@@ -92,9 +94,9 @@ const CitySearch = () => {
                 </div>
             </div>
             <div className='card'>
-                {historyData && <WeatherCard historyWeatherData={historyData} yesterday={yesterday} tomorrow={tomorrow} />}
+                {showWeatherCard && <WeatherCard historyWeatherData={historyData} yesterday={yesterday} tomorrow={tomorrow} />}
             </div>
-            {historyData && (
+            {showWeatherCard && (
                 <div className="additional-info">
                     <p className="info-line">latitude: {lat} <span className="spacer"></span> longitude: {lon}</p>
                     <p className="info-line">accurate to: {lastUpdated}</p>

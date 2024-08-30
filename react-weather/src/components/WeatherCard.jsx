@@ -21,13 +21,10 @@ const WeatherCard = ({ historyWeatherData, yesterday, tomorrow }) => {
             let temp;
             console.log(h);
             if (currentHour === 23 && h === 0) {
-                console.log(hourlyDataTomorrow);
                 temp = Math.ceil(hourlyDataTomorrow[h].temp_c);
             } else if (currentHour < 3 && h >= 21) {
-                console.log(hourlyDataYesterday);
                 temp = Math.ceil(hourlyDataYesterday[h].temp_c);
             } else {
-                console.log(hourlyDataToday);
                 temp = Math.ceil(hourlyDataToday[h].temp_c);
             }
 
